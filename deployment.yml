@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: hs-webapi-dep
+  labels:
+    #Project ID
+    app: hs-webapi
+spec:
+  #Run two instances of our application
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: hs-webapi
+    spec:
+      #Container details
+      containers:
+        - name: api
+          image: gcr.io/hs-webapi/api:0.0.3
+          imagePullPolicy: Always
+          #Ports to expose
+          ports:
+            - containerPort: 3000
